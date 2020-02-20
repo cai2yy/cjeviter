@@ -6,7 +6,7 @@ import eventemit.AbstractEventEmitter;
  * @author Cai2yy
  * @date 2020/2/20 11:40
  */
-public class Parent extends AbstractEventEmitter {
+class Parent extends AbstractEventEmitter {
     Son son;
 
     public Parent() {

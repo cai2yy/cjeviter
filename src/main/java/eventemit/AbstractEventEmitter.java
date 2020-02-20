@@ -83,6 +83,7 @@ public class AbstractEventEmitter implements eventemit.EventEmitter {
                 throw new Exception("params do not match");
             }
             // remove the listener if this event can only triggered once
+            func.setAccessible(true);
             func.invoke(emitter, args);
             if (listener.flash()) {
                 deleteListener = listener;
