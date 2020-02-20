@@ -1,3 +1,5 @@
+package eventemit;
+
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -6,7 +8,7 @@ import java.util.*;
  * @date 2020/2/15 13:12
  */
 
-public class AbstractEventEmitter implements EventEmitter {
+public class AbstractEventEmitter implements eventemit.EventEmitter {
 
     Map<String, List<Func>> registry;
 
@@ -14,7 +16,7 @@ public class AbstractEventEmitter implements EventEmitter {
         return registry;
     }
 
-    AbstractEventEmitter() {
+    public AbstractEventEmitter() {
         this.registry = new HashMap<String, List<Func>>();
     }
 
