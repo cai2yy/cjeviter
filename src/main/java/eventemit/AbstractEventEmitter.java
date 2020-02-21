@@ -8,7 +8,7 @@ import java.util.*;
  * @date 2020/2/15 13:12
  */
 
-public class AbstractEventEmitter implements eventemit.EventEmitter {
+public class AbstractEventEmitter implements EventEmitter {
 
     Map<String, List<Func>> registry;
 
@@ -20,15 +20,15 @@ public class AbstractEventEmitter implements eventemit.EventEmitter {
         this.registry = new HashMap<String, List<Func>>();
     }
 
-    public void on(EventEmitter emitter, String event, String funcName) throws Exception {
+    public void on(EventEmitter emitter, String event, String funcName) {
         doBind(emitter, event, funcName, false);
     }
 
-    public void once(EventEmitter emitter, String event, String funcName) throws Exception {
+    public void once(EventEmitter emitter, String event, String funcName) {
         doBind(emitter, event, funcName, true);
     }
 
-    private void doBind(EventEmitter emitter, String event, String funcName, boolean flash) throws Exception {
+    private void doBind(EventEmitter emitter, String event, String funcName, boolean flash) {
         List<Func> listeners = emitter.registry().getOrDefault(event, new ArrayList<Func>());
         listeners.add(new Pair(this, funcName, flash));
         emitter.registry().put(event, listeners);
@@ -36,7 +36,7 @@ public class AbstractEventEmitter implements eventemit.EventEmitter {
         onAddListener();
     }
 
-    public void removeListener(String event, String funcName) throws Exception {
+    public void removeListener(String event, String funcName) {
         List<Func> listeners = this.registry.get(event);
         listeners.removeIf(listener -> listener.Emitter() == this && listener.FuncName().equals(funcName));
         if (listeners.size() == 0) {
@@ -46,7 +46,7 @@ public class AbstractEventEmitter implements eventemit.EventEmitter {
         onRemoveListener();
     }
 
-    public void off(String event) throws Exception {
+    public void off(String event) {
         Map<String, List<Func>> listeners = this.registry;
         listeners.remove(event);
         // trigger built-in event
@@ -63,6 +63,7 @@ public class AbstractEventEmitter implements eventemit.EventEmitter {
         for (Func listener : listeners) {
             EventEmitter emitter = listener.Emitter();
             String funcName = listener.FuncName();
+            var o = new Object();
             Method[] methods = emitter.getClass().getDeclaredMethods();
             Method func = null;
             for (Method method : methods) {
@@ -99,20 +100,24 @@ public class AbstractEventEmitter implements eventemit.EventEmitter {
 
     }
 
-    public void onAddListener() throws Exception {
+    public void onAddListener() {
         if (this.registry.get("addListener") != null) {
-            emit("addListener");
-            return;
+            try {
+                emit("addListener");
+            } catch (Exception ignored) {
+            }
         }
-        // System.out.println("add listener successfully");
+        // add default listener for "addListener" event
     }
 
-    public void onRemoveListener() throws Exception {
+    public void onRemoveListener() {
         if (this.registry.get("removeListener") != null) {
-            emit("removeListener");
-            return;
+            try {
+                emit("removeListener");
+            } catch (Exception ignored) {
+            }
         }
-        // System.out.println("remove listener successfully");
+        // add default listener for "removeListener" event
     }
 
     /** 基础类型和封装类型的转换 */
