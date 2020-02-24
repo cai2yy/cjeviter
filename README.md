@@ -1,27 +1,26 @@
-# README
-
+JavEventEmitter
+---
 模仿node.js中eventEmitter机制做的java事件-触发机制类
 
 使用时只需继承AbstractEventEmitter类，即可调用相关方法实现事件-触发机制
 
-
-### 特点
+特点
+---
 - 基于"对象-对象"的监听-触发机制而非事件总线式的事件-触发机制
 - 封装完整，继承即用
 - 脚手架式设计预留后续开发空间
 - 支持链式触发
 
-
-### 知识点
+知识点
+---
 - 反射调用类和方法
     - 处理反射获得多态事件的传参匹配
     - 禁用安全性检查绕过监听器所属类或方法的权限限制
 - 面向抽象编程，接口、抽象类和（供开发）新实现类的完整框架设计
 - 规范的名称、注释和接口设计
 
-
-### 方法接口
-
+方法接口
+---
 - on(): 通过事件关键字将调用者的一个方法作为监听者绑定到特定对象上
 
     例：`parent.on(son, "home", "sayHi");`
@@ -39,8 +38,8 @@
     例：`son.emit("home", 10);`
     
     
-### 内置事件
-
+内置事件
+---
 开发者可重写以下方法实现定制功能，使用者可重新绑定相关关键字来实现定制功能
 - onAddListener：当新增监听器时默认调用
 
@@ -48,3 +47,18 @@
 - onRemoveListener：当移除监听器时默认调用
 
     例：`son.on(son, "removeListener", "onRemoveListener");` -> 由son自己的onRemoveListener()方法覆盖默认方法
+
+Cai2yy
+---
+Java, Python, Node.js, Love 
+
+https://github.com/cai2yy
+
+- ArmOT: 边缘计算IOT软件+数据上云web端管理平台
+> https://github.com/cai2yy/armot
+- CJHttp: 基于netty实现的轻便web框架（http）
+> https://github.com/cai2yy/cjhttp
+- CJIoc：多功能的轻量级IOC框架
+> https://github.com/cai2yy/cjioc
+- CJEviter: 模仿node.js中eventEmitter类的JAVA实现
+> https://github.com/cai2yy/cjeviter
