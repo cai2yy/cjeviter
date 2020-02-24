@@ -1,4 +1,4 @@
-JavEventEmitter
+CJEviter
 ---
 模仿node.js中eventEmitter机制做的java事件-触发机制类
 
