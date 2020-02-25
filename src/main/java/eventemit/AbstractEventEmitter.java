@@ -8,7 +8,7 @@ import java.util.*;
  * @date 2020/2/15 13:12
  */
 
-public class AbstractEventEmitter implements EventEmitter {
+public abstract class AbstractEventEmitter implements EventEmitter {
 
     Map<String, List<Func>> registry;
 
@@ -100,24 +100,30 @@ public class AbstractEventEmitter implements EventEmitter {
 
     }
 
-    public void onAddListener() {
+    private void onAddListener() {
         if (this.registry.get("addListener") != null) {
             try {
                 emit("addListener");
             } catch (Exception ignored) {
             }
         }
-        // add default listener for "addListener" event
+        defaultAddListener();
     }
 
-    public void onRemoveListener() {
+    private void defaultAddListener() {
+    }
+
+    private void onRemoveListener() {
         if (this.registry.get("removeListener") != null) {
             try {
                 emit("removeListener");
             } catch (Exception ignored) {
             }
         }
-        // add default listener for "removeListener" event
+        defaultRemoverListener();
+    }
+
+    private void defaultRemoverListener() {
     }
 
     /** 基础类型和封装类型的转换 */

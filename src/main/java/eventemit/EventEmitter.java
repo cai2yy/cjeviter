@@ -53,10 +53,6 @@ public interface EventEmitter {
      */
     void emit(String event, Object ...args) throws Exception;
 
-    void onAddListener() throws Exception;
-
-    void onRemoveListener() throws Exception;
-
     static interface Func {
         EventEmitter Emitter();
         String FuncName();
